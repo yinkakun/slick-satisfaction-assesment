@@ -6,10 +6,6 @@ import { motion } from 'framer-motion';
 import { Container } from '@/components/container';
 
 const MotionBox = motion<Chakra.BoxProps>(Chakra.Box);
-const MotionStack = motion<Chakra.StackProps>(Chakra.Stack);
-const MotionText = motion<Chakra.TextProps>(Chakra.Text);
-const MotionLink = motion<Chakra.LinkProps>(Chakra.Link);
-const MotionCollapse = motion<Chakra.CollapseProps>(Chakra.Collapse);
 
 const navItemMotion = {
   initial: { opacity: 0 },
@@ -105,20 +101,24 @@ export const Header = (): React.ReactElement => {
                   {item.label}
                 </Chakra.Text>
                 <MotionBox variants={navItemMotion}>
-                  <MotionCollapse in={isOpen}>
-                    <MotionBox>
+                  <Chakra.Collapse in={isOpen}>
+                    <Chakra.Box>
                       <Chakra.Box onMouseEnter={onOpen} minHeight="3rem">
-                        <MotionText>{item?.sublabel}</MotionText>
+                        <Chakra.Text>{item?.sublabel}</Chakra.Text>
                       </Chakra.Box>
-                      <MotionStack spacing="5px">
+                      <Chakra.Stack spacing="5px">
                         {item?.children.map((childItem) => (
-                          <MotionLink onMouseEnter={onOpen} width="fit-content">
+                          <Chakra.Link
+                            onMouseEnter={onOpen}
+                            width="fit-content"
+                            textTransform="capitalize"
+                          >
                             {childItem.label}
-                          </MotionLink>
+                          </Chakra.Link>
                         ))}
-                      </MotionStack>
-                    </MotionBox>
-                  </MotionCollapse>
+                      </Chakra.Stack>
+                    </Chakra.Box>
+                  </Chakra.Collapse>
                 </MotionBox>
               </MotionBox>
             ))}
